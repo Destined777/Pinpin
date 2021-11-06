@@ -26,6 +26,6 @@ func GetAllCompetitionsDetails() (res []model.ComperitionEntails, err error) {
 								"master_sex",
 								"master_gradeandmajor",
 								"master_introduction",
-								"teammate_introduction").Where("deadline >= ?",time.Now()).Find(&res).Error
+								"teammate_introduction").Where("deadline >= ?",time.Now()).Order("created_at DESC").Find(&res).Error
 	return
 }
