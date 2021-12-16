@@ -1,15 +1,16 @@
 package main
 
 import (
+	"Pinpin/middleware"
+	"Pinpin/routes"
 	"context"
 	"flag"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis"
 	"gorm.io/driver/mysql"
 	_ "gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"Pinpin/middleware"
-	"Pinpin/routes"
 
 	"Pinpin/config"
 	"Pinpin/global"
@@ -33,6 +34,7 @@ func init() {
 	initFlag()
 	initConfig()
 	initDB()
+	initRedis()
 }
 
 func initFlag() {
@@ -70,7 +72,7 @@ func initDB() {
 		sqlDB.SetMaxOpenConns(10000)
 		sqlDB.SetConnMaxLifetime(time.Minute)
 		global.DB = localDb
-		global.DB.AutoMigrate(&model.Competition_recruit{})
+		global.DB.AutoMigrate(&model.Competition_pinpin{},&model.AuthUser{},&model.Follow{},&model.System_notice{},&model.Notice{},model.Report{},&model.ThumbUp{},&model.Reply{})
 		cancel()
 	}(ctx)
 
@@ -83,5 +85,21 @@ func initDB() {
 		case context.Canceled:
 			fmt.Println("context cancelled by force. whole process is complete")
 		}
+	}
+}
+
+func initRedis() {
+	redisSettings := global.Config.RedisSettings
+	global.RedisClient = redis.NewClient(&redis.Options{
+		Network:  "tcp",
+		Addr:     redisSettings.Address + ":" + redisSettings.Port,
+		Password: redisSettings.Password,
+		DB:       0,
+	})
+	_, err := global.RedisClient.Ping().Result()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("redis连接成功")
 	}
 }

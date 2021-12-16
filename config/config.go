@@ -9,6 +9,8 @@ import (
 
 type Config struct {
 	DbSettings    DbSettings    `json:"DbSettings"`
+	RedisSettings RedisSettings `json:"RedisSettings"`
+	EmailSettings EmailSettings `json:"EmailSettings"`
 }
 
 type DbSettings struct {
@@ -16,6 +18,18 @@ type DbSettings struct {
 	Password string `json:"Password"`
 	Hostname string `json:"Hostname"`
 	Dbname   string `json:"Dbname"`
+}
+
+type RedisSettings struct {
+	Address  string `json:"Address"`
+	Password string `json:"Password"`
+	Port     string `json:"Port"`
+}
+
+type EmailSettings struct {
+	User	 string `json:"User"`
+	Password string `json:"Password"`
+	Host 	 string `json:"Host"`
 }
 
 func ReadSettingsFromFile(settingFilePath string) (config *Config) {

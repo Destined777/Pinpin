@@ -4,5 +4,15 @@
     "Password": "Mjy030105",
     "Hostname": "localhost:3306",
     "Dbname": "pinpin"
+  },
+  "RedisSettings": {
+    "Address": "localhost",
+    "Password": "",
+    "Port": "6379"
+  },
+  "EmailSettings": {
+    "User": "destined777@163.com",
+    "Password": "UCIHCVAVMJCSEWBV",
+    "Host": "smtp.163.com:25"
   }
 }
