@@ -20,8 +20,8 @@ func UsePinpinRouter(r *gin.Engine) {
 			manage.POST("/sendVerifyCode", api.SendVerificationCodeHandler)
 			manage.POST("/signin", api.SigninHandler)
 			manage.POST("/activation", middleware.Auth(), api.ActivateEmailHandler)
-			manage.GET("/getMyContact", api.GetMyContactHandler)
-			manage.GET("/getMyInfor",api.GetMyInforHandler)
+			manage.GET("/getMyContact", middleware.Auth(), api.GetMyContactHandler)
+			manage.GET("/getMyInfor",middleware.Auth(), api.GetMyInforHandler)
 
 			change := manage.Group("/change",middleware.Auth())
 			{
