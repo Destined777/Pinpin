@@ -63,8 +63,7 @@ func SendEmail(Email string) (err error) {
 }
 
 func GetTimeStamp() (t int64) {
-	loc, _ := time.LoadLocation("Asia/Shanghai")
-	t = time.Now().In(loc).Unix()
+	t = time.Now().Unix()
 	return
 }
 
