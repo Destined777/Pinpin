@@ -5,6 +5,6 @@ data:
   docker_repo: registry.cn-beijing.aliyuncs.com/pivotstudio/pinpin
   docker_registry: registry.cn-beijing.aliyuncs.com 
   entry_file: main.go
-  default_branch: main
+  default_branch: master
   docker_user_name_secret: docker_user_name 
   docker_pass_secret: docker_pass
