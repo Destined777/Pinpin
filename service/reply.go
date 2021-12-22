@@ -37,7 +37,7 @@ func DeleteReplyService(param http_param.DeleteReplyRequestArgument) (err error)
 		return errors.New("不能删除他人的评论")
 	}
 	//该条评论已被删除
-	if reply.IsDeleted == true {
+	if reply.IsDeleted {
 		return errors.New("该条评论已被删除")
 	}
 	//删除评论
