@@ -13,7 +13,7 @@ spec:
         app: pinpin
     spec:
       containers:
-        - image: registry.cn-beijing.aliyuncs.com/pivotstudio/pinpin:{{.build_tag}}
+        - image: registry.cn-beijing.aliyuncs.com/pivotstudio/pinpin:latest
           name: pinpin
           ports:
             - containerPort: 80
