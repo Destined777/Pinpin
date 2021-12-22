@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pinpin
+  namespace: pinpin
+spec:
+  selector:
+    matchLabels:
+      app: pinpin
+  template:
+    metadata:
+      labels:
+        app: pinpin
+    spec:
+      containers:
+        - image: registry.cn-beijing.aliyuncs.com/pivotstudio/pinpin:{{.build_tag}}
+          name: pinpin
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: pinpin
+              mountPath: /etc/pinpin
+      volumes:
+        - name: pinpin
+          configMap:
+            name: pinpin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: pinpin
+  name: pinpin
+  labels:
+    app: pinpin
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      name: http
+  selector:
+    app: pinpin
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: pinpin
+  name: gateway
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    # 开启use-regex，启用path的正则匹配
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    # ratelimit
+    nginx.ingress.kubernetes.io/limit-connections: "60"
+    nginx.ingress.kubernetes.io/limit-rps: "60"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto https;
+spec:
+  rules:
+    - host: pinpin.pivotstudio.cn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pinpin
+                port:
+                  number: 80
+
+  tls:
+    - hosts:
+        - pinpin.pivotstudio.cn
+      secretName: pivot-tls-cert
