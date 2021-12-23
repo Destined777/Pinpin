@@ -48,6 +48,7 @@ func initConfig() {
 	configFile := "/etc/pinpin/" + configPrefix + *env + configSuffix
 	fmt.Println(configFile)
 	global.Config = config.ReadSettingsFromFile(configFile)
+	fmt.Println(global.Config.EmailSettings)
 }
 
 func initDB() {
