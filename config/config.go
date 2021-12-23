@@ -30,6 +30,7 @@ type EmailSettings struct {
 	User     string `json:"User"`
 	Password string `json:"Password"`
 	Host     string `json:"Host"`
+	Port 	 string `json:"Port`
 }
 
 func ReadSettingsFromFile(settingFilePath string) (config *Config) {

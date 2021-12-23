@@ -1,22 +1,18 @@
 package email
 
 import (
-	"net/smtp"
-	"strings"
+	"gopkg.in/gomail.v2"
+	"strconv"
 )
 
-func SendEmail(user, sendUserName, password, host, to, subject, body, mailtype string) error {
-	hp := strings.Split(host, ":")
-	auth := smtp.PlainAuth("", user, password, hp[0])
-	var content_type string
-	if mailtype == "html" {
-		content_type = "Content-Type: text/" + mailtype + "; charset=UTF-8"
-	} else {
-		content_type = "Content-Type: text/plain" + "; charset=UTF-8"
-	}
-
-	msg := []byte("To: " + to + "\r\nFrom: " + sendUserName + "<" + user + ">" + "\r\nSubject: " + subject + "\r\n" + content_type + "\r\n\r\n" + body)
-	send_to := strings.Split(to, ";")
-	err := smtp.SendMail(host, auth, user, send_to, msg)
+func SendEmail(user, sendUserName, password, host, port, to, subject, body string) error {
+	Port, _ := strconv.Atoi(port)
+	m := gomail.NewMessage()
+	m.SetHeader("From",  m.FormatAddress(user, sendUserName))
+	m.SetHeader("To", to)
+	m.SetHeader("Subject", subject)
+	m.SetBody("text/html", body)
+	d := gomail.NewDialer(host, Port, user, password)
+	err := d.DialAndSend(m)
 	return err
 }

@@ -58,7 +58,7 @@ func SendEmail(Email string) (err error) {
 
 	sendUserName := "Pinpin" //发送邮件的人名称
 	fmt.Println("send email")
-	err = email.SendEmail(emailClient.User, sendUserName, emailClient.Password, emailClient.Host, to, subject, body, "html")
+	err = email.SendEmail(emailClient.User, sendUserName, emailClient.Password, emailClient.Host, emailClient.Port,to, subject, body)
 	return
 }
 
