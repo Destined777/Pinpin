@@ -56,7 +56,7 @@ func SigninHandler(ctx *gin.Context) {
 		return
 	}
 	params.Email = strings.Title(params.Email) //把email首字母改为大写
-	if err, token, res := service.SigninService(params); err != nil {
+	if err, token, name, image := service.SigninService(params); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"msg": err.Error(),
 		})
@@ -65,7 +65,8 @@ func SigninHandler(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
 			"msg":   		"ok",
 			"token": 		token,
-			"information":  res,
+			"username":  	name,
+			"image":		image,
 		})
 		return
 	}

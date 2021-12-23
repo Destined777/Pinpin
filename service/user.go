@@ -29,7 +29,7 @@ func SendVerificationCodeService(email string) (err error) {
 	return nil
 }
 
-func SigninService(param http_param.SigninArguments) (err error, token string, res model.AuthUser) {
+func SigninService(param http_param.SigninArguments) (err error, token string, name string, image int64) {
 	isExist, err := dao.ExistUser(param.Email)
 	if err != nil { //查询出错
 		return
@@ -44,7 +44,9 @@ func SigninService(param http_param.SigninArguments) (err error, token string, r
 		return
 	}
 	token, _ = util.GenerateTokenByJwt(param.Email)
-	res, err = dao.GetUser(param.Email)
+	res, err := dao.GetUser(param.Email)
+	name = res.Username
+	image = res.Image
 	return
 }
 
