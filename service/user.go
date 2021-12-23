@@ -22,6 +22,8 @@ func SendVerificationCodeService(email string) (err error) {
 		err := util.SendEmail(email)
 		if err != nil {
 			log.Println(err)
+		} else {
+			log.Println("send success")
 		}
 	}()
 	return nil

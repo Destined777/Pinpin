@@ -6,10 +6,10 @@ import (
 	"context"
 	"flag"
 	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
 	"gorm.io/driver/mysql"
-	_ "gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
 	"Pinpin/config"
