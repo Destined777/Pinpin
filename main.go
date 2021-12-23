@@ -45,7 +45,7 @@ func initFlag() {
 
 // 读取环境配置文件
 func initConfig() {
-	configFile :=  configPrefix + *env + configSuffix
+	configFile := "/etc/pinpin/"+ configPrefix + *env + configSuffix
 	fmt.Println(configFile)
 	global.Config = config.ReadSettingsFromFile(configFile)
 	fmt.Println(global.Config.EmailSettings)
