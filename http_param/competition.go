@@ -134,6 +134,8 @@ type ComperitionEntails struct { //帖子详情页
 	Teammate_introduction    string
 	Owner_email              string
 	ReplyNum                 int64
+	CreatedAt                int64
+	UpdatedAt                int64
 }
 
 type SearchCompetitions struct {

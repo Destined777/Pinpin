@@ -91,7 +91,7 @@ func GetAllCompetitionsDetails() (res []http_param.ComperitionEntails, err error
 		"Master_introduction",
 		"Teammate_introduction",
 		"Owner_email",
-		"reply_num").Where("Is_deleted = ? and Deadline >= ?", 0, time.Now()).Order("Updated_at DESC").Find(&res).Error
+		"reply_num", ).Where("Is_deleted = ? and Deadline >= ?", 0, time.Now()).Order("Updated_at DESC").Find(&res).Error
 	return
 }
 
