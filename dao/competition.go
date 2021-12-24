@@ -75,8 +75,8 @@ func DeleteCompetition(param http_param.DeleteCompetitionRequestArgument) (err e
 func GetAllCompetitionsDetails() (res []http_param.ComperitionEntails, err error) {
 	err = global.DB.Model(&model.Competition_pinpin{}).Select("pinpin_id",
 		"Title",
-		"Created_at",
-		"Updated_at",
+		"created_at",
+		"updated_at",
 		"Contact_qq",
 		"Contact_wechat",
 		"Contact_tel",
@@ -98,8 +98,8 @@ func GetAllCompetitionsDetails() (res []http_param.ComperitionEntails, err error
 func SearchCompetitions(title string) (res []http_param.ComperitionEntails, err error) {
 	err = global.DB.Model(&model.Competition_pinpin{}).Select("pinpin_id",
 		"Title",
-		"Created_at",
-		"Updated_at",
+		"created_at",
+		"updated_at",
 		"Contact_qq",
 		"Contact_wechat",
 		"Contact_tel",
