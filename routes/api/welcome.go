@@ -74,3 +74,27 @@ func SearchCompetitionsHandler(ctx *gin.Context) {
 		return
 	}
 }
+
+func GetUserInforHandler(ctx *gin.Context) {
+	params := http_param.GetUserArgument{}
+	if err := ctx.ShouldBind(&params); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"msg": params.GetError(err),
+		})
+		return
+	}
+	name, image, err := service.GetUserInforService(params.Email)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"msg": err.Error(),
+		})
+		return
+	} else {
+		ctx.JSON(http.StatusOK, gin.H{
+			"msg": 		"ok",
+			"Username": name,
+			"Image":	image,
+		})
+		return
+	}
+}

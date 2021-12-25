@@ -181,3 +181,18 @@ func (r *VerifyCodeArgument) GetError(err error) string {
 	}
 	return "参数错误"
 }
+
+type GetUserArgument struct {
+	Email    string `form:"Email" binding:"required"`
+}
+
+func (r *GetUserArgument) GetError(err error) string {
+	m := map[string]string{
+		"Email":    "电子邮件",
+	}
+	s := util.ErrorHandler(err, m)
+	if s != "" {
+		return s
+	}
+	return "参数错误"
+}

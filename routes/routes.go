@@ -14,6 +14,7 @@ func UsePinpinRouter(r *gin.Engine) {
 			welcome.POST("/createUser", api.CreateUserHandler)
 			welcome.GET("/getCompetitions", api.GetCompetitionDetailsHandler)
 			welcome.GET("/searchCompetitions", api.SearchCompetitionsHandler)
+			welcome.GET("/getUserInfor", api.GetUserInforHandler)
 		}
 		manage := Pinpinapi.Group("/manage")
 		{

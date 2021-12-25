@@ -166,3 +166,10 @@ func GetMyInforService(email string) (res http_param.ChangeInforArgument, err er
 	}
 	return
 }
+
+func GetUserInforService(email string) (name string, image int64, err error) {
+	res, err := dao.GetUser(email)
+	name = res.Username
+	image = res.Image
+	return
+}
