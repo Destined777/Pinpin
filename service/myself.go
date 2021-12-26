@@ -39,6 +39,9 @@ func GetMyPinpinService(email string) (results []map[string]interface{}, err err
 			"IsFollow": isfollow,
 		})
 	}
+	if len(results) == 0 {
+		return make([]map[string]interface{}, 0), nil
+	}
 	return
 }
 
@@ -77,6 +80,9 @@ func GetMyFollowService(email string) (results []map[string]interface{}, err err
 				"IsFollow": isfollow,
 			})
 		}
+	}
+	if len(results) == 0 {
+		return make([]map[string]interface{}, 0), nil
 	}
 	return
 }
