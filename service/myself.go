@@ -33,8 +33,8 @@ func GetMyPinpinService(email string) (results []map[string]interface{}, err err
 			"IsDeleted":                value.IsDeleted,
 			"Owner_email":              value.Owner_email,
 			"ReplyNum":                 value.ReplyNum,
-			"Created_at":				value.CreatedAt,
-			"Updated_at":				value.UpdatedAt,
+			"CreatedAt":				value.CreatedAt,
+			"UpdatedAt":				value.UpdatedAt,
 			//用户是否收藏该拼拼帖
 			"IsFollow": isfollow,
 		})
@@ -71,8 +71,8 @@ func GetMyFollowService(email string) (results []map[string]interface{}, err err
 				"IsDeleted":                value.IsDeleted,
 				"Owner_email":              value.Owner_email,
 				"ReplyNum":                 value.ReplyNum,
-				"Created_at":				value.CreatedAt,
-				"Updated_at":				value.UpdatedAt,
+				"CreatedAt":				value.CreatedAt,
+				"UpdatedAt":				value.UpdatedAt,
 				//用户是否收藏该拼拼帖
 				"IsFollow": isfollow,
 			})
